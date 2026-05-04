@@ -9,12 +9,12 @@ export async function load() {
 }
 
 export const actions = {
-	insert: async ({ request }): Promise<Task> => {
+	insert: async ({ request }) => {
 		const data: FormData = await request.formData();
 		const title: string = data.get('title') as string;
 		const body: string = data.get('body') as string;
 		const newTask: Task = await insertTask(title, body);
-		return newTask;
+		return { newTask };
 	},
 	delete: async ({ request }) => {
 		const data: FormData = await request.formData();

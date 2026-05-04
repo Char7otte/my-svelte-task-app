@@ -4,9 +4,7 @@ import { sql } from './psql';
 
 export async function getTasks(): Promise<Task[]> {
 	try {
-		const data = await sql<
-			Task[]
-		>`SELECT id, title, body, created_at AS "createdAt" FROM tasks LIMIT 5`;
+		const data = await sql<Task[]>`SELECT id, title, body, created_at AS "createdAt" FROM tasks`;
 		return data;
 	} catch (e) {
 		console.error(e);
