@@ -22,7 +22,7 @@ export async function insertTask(title: string, body: string): Promise<Task> {
 		return data[0];
 	} catch (e) {
 		console.error(e);
-		error(505, { message: 'Failed to insert task' });
+		error(500, { message: 'Failed to insert task' });
 	}
 }
 
