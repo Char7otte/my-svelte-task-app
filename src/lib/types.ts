@@ -4,3 +4,10 @@ export type Task = {
 	body: string;
 	createdAt: Date;
 };
+
+export type User = {
+	id: string;
+	email: string;
+	password: string;
+	name: string;
+};
