@@ -16,4 +16,7 @@
 	<a href={resolve('/task')} class="text-xl text-white">Tasks</a>
 	<a href={resolve('/user')} class="text-xl text-white">Account</a>
 </nav>
+
+<div class="m-10">
 	{@render children()}
+</div>
