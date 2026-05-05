@@ -1,17 +1,40 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import RequiredAsterisk from '$lib/requiredAsterisk.svelte';
 
-	let isSignIn = $state<boolean>(false);
+	let option: string = $state<'sign in' | 'sign up'>('sign in');
+	let isSignIn: boolean = $derived<boolean>(option === 'sign in');
 </script>
 
-<form method={isSignIn ? 'GET' : 'POST'} use:enhance action={`?/${isSignIn ? 'signIn' : 'signUp'}`}>
-	<label for="email">Email:</label>
+<form method="POST" use:enhance>
+	<h1 class="text-2xl">
+		{isSignIn ? 'Sign In' : 'Sign Up'}
+	</h1>
+	<input
+		type="radio"
+		id="sign-in"
+		class="sr-only"
+		bind:group={option}
+		value="sign in"
+		name="option"
+	/>
+	<label for="sign-in" class={isSignIn ? 'underline' : ''}>Sign in</label>
+	<input
+		type="radio"
+		id="sign-up"
+		class="sr-only"
+		bind:group={option}
+		value="sign up"
+		name="option"
+	/>
+	<label for="sign-up" class={!isSignIn ? 'underline' : ''}>Sign up</label>
+	<label for="email" class="block">Email: <RequiredAsterisk /> </label>
 	<input type="email" name="email" id="email" required />
 	{#if !isSignIn}
-		<label for="name">Name:</label>
-		<input type="text" name="name" id="name" required />
+		<label for="username" class="block">Username: </label>
+		<input type="text" name="username" id="username" />
 	{/if}
-	<label for="password">Password:</label>
-	<input type="password" name="password" id="password" required />
+	<label for="password" class="block">Password: <RequiredAsterisk /></label>
+	<input type="password" name="password" id="password" required minlength="8" />
 	<button type="submit">{isSignIn ? 'Sign in' : 'Sign up'}</button>
 </form>
