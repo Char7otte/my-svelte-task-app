@@ -3,11 +3,12 @@ export type Task = {
 	title: string;
 	body: string;
 	createdAt: Date;
+	creatorID: string;
 };
 
 export type User = {
 	id: string;
 	email: string;
-	password: string;
+	passwordHash: string;
 	name: string;
 };
