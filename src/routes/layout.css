@@ -5,6 +5,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer base {
+	button {
+		@apply border-2 border-solid px-1.5 py-1;
+	}
+	input:not([type='radio']):not([type='checkbox']) {
+		@apply mb-2 block border-2 border-solid px-1.5 py-1;
+	}
+}
+
 :root {
 	--background: oklch(1 0 0);
 	--foreground: oklch(0.145 0 0);
