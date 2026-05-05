@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import favicon from '$lib/assets/favicon.ico';
 	import './layout.css';
 
@@ -10,4 +11,9 @@
 	<title>webi wabo</title>
 </svelte:head>
 
-{@render children()}
+<nav class="space-x-5 bg-black p-4">
+	<a href={resolve('/')} class="text-xl text-white">Home</a>
+	<a href={resolve('/task')} class="text-xl text-white">Tasks</a>
+	<a href={resolve('/user')} class="text-xl text-white">Account</a>
+</nav>
+	{@render children()}
