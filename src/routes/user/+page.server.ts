@@ -5,6 +5,12 @@ import type { User } from '$lib/types.js';
 import { error, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
 
+export async function load(event) {
+	return {
+		user: event.locals.user
+	};
+}
+
 export const actions = {
 	default: async ({ request, cookies }) => {
 		const data: FormData = await request.formData();

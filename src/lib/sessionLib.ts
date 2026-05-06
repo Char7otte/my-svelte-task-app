@@ -52,9 +52,7 @@ export async function getSession(sessionID: string): Promise<Session | null> {
 
 	const result = await getSessionByID(sessionID);
 
-	if (result === null) {
-		return null;
-	}
+	if (result === null) return null;
 
 	const session: Session = { ...result };
 

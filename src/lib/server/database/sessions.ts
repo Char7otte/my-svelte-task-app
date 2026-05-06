@@ -21,7 +21,7 @@ export async function postSession(
 	}
 }
 
-export async function getSessionByID(id: string): Promise<Session> {
+export async function getSessionByID(id: string): Promise<Session | null> {
 	try {
 		//Unable to directly assign Session to data,
 		// as created_at in the database is an integer(date in seconds)
@@ -29,6 +29,7 @@ export async function getSessionByID(id: string): Promise<Session> {
 		const data = await sql`
             SELECT id, secret_hash AS "secretHash", created_at AS "createdAt", user_id as "userID"
             FROM sessions WHERE id = ${id}`;
+		if (data.length === 0) return null;
 		data[0].createdAt = new Date(data[0].createdAt * 1000);
 		return data[0] as Session;
 	} catch (e) {
