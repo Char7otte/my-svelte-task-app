@@ -1,10 +1,22 @@
 import { deleteTask, getTasks, postTask } from '$lib/server/database/tasks.js';
+import { getUserByID } from '$lib/server/database/users';
+import { validateSessionToken } from '$lib/sessionLib.js';
 import type { Task } from '$lib/types';
 
-export async function load() {
+export async function load({ cookies }) {
 	const tasks: Task[] = await getTasks();
+
+	const token = cookies.get('token');
+	if (!token) return { tasks, user: null };
+
+	const session = await validateSessionToken(token);
+	if (!session) return { tasks, user: null };
+
+	const user = await getUserByID(session.userID);
+
 	return {
-		tasks
+		tasks,
+		user
 	};
 }
 
