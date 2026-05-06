@@ -9,8 +9,6 @@ export const actions = {
 		const data: FormData = await request.formData();
 		const email: string = data.get('email') as string;
 		const password: string = data.get('password') as string;
-		const passwordHash: string = await bcrypt.hash(password, 10);
-
 		const option: string = data.get('option') as string;
 
 		if (option === 'sign in') {
@@ -18,6 +16,7 @@ export const actions = {
 			// const isCorrect = await bcrypt.compare(password, user.passwordHash);
 		} else if (option === 'sign up') {
 			const username = data.get('username') as string;
+			const passwordHash: string = await bcrypt.hash(password, 10);
 			const user: User = await postUser(email, passwordHash, username);
 			const session = await createSession(user.id);
 			console.log('Created Session: ', session);
