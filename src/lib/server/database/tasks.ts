@@ -12,7 +12,7 @@ export async function getTasks(): Promise<Task[]> {
 	}
 }
 
-export async function insertTask(title: string, body: string): Promise<Task> {
+export async function postTask(title: string, body: string): Promise<Task> {
 	try {
 		const data = await sql<
 			Task[]

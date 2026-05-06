@@ -1,4 +1,4 @@
-import { getUserByEmail, postUser } from '$lib/server/users.js';
+import { postUser } from '$lib/server/database/users';
 import bcrypt from 'bcrypt';
 import { error } from 'console';
 

@@ -1,4 +1,4 @@
-import { deleteTask, getTasks, insertTask } from '$lib/server/tasks';
+import { deleteTask, getTasks, postTask } from '$lib/server/database/tasks.js';
 import type { Task } from '$lib/types';
 
 export async function load() {
@@ -13,7 +13,7 @@ export const actions = {
 		const data: FormData = await request.formData();
 		const title: string = data.get('title') as string;
 		const body: string = data.get('body') as string;
-		const newTask: Task = await insertTask(title, body);
+		const newTask: Task = await postTask(title, body);
 		return { newTask };
 	},
 	delete: async ({ request }) => {

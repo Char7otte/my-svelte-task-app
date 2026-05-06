@@ -2,7 +2,7 @@ import type { Session } from '$lib/types';
 import { error } from '@sveltejs/kit';
 import { sql } from './psql';
 
-export async function insertSession(
+export async function createSession(
 	id: string,
 	secretHash: Uint8Array,
 	createdAt: Date,
