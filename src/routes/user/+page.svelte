@@ -2,8 +2,8 @@
 	import { enhance } from '$app/forms';
 	import RequiredAsterisk from '$lib/requiredAsterisk.svelte';
 
-	let option: string = $state<'sign in' | 'sign up'>('sign in');
-	let isSignIn: boolean = $derived<boolean>(option === 'sign in');
+	let signOption: string = $state<'sign in' | 'sign up'>('sign in');
+	let isSignIn: boolean = $derived<boolean>(signOption === 'sign in');
 </script>
 
 <form method="POST" use:enhance>
@@ -14,18 +14,18 @@
 		type="radio"
 		id="sign-in"
 		class="sr-only"
-		bind:group={option}
+		bind:group={signOption}
 		value="sign in"
-		name="option"
+		name="sign-option"
 	/>
 	<label for="sign-in" class={isSignIn ? 'underline' : ''}>Sign in</label>
 	<input
 		type="radio"
 		id="sign-up"
 		class="sr-only"
-		bind:group={option}
+		bind:group={signOption}
 		value="sign up"
-		name="option"
+		name="sign-option"
 	/>
 	<label for="sign-up" class={!isSignIn ? 'underline' : ''}>Sign up</label>
 	<label for="email" class="block">Email: <RequiredAsterisk /> </label>
