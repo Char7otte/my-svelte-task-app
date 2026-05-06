@@ -1,5 +1,8 @@
-import { generateSecureRandomString, hashSecret } from '$lib/hashUtils';
-import type { SessionWithToken } from '$lib/types';
+import { constantTimeEqual, generateSecureRandomString, hashSecret } from '$lib/hashUtils';
+import type { Session, SessionWithToken } from '$lib/types';
+import { deleteSessionByID, getSessionByID, postSession } from './database/sessions';
+
+const sessionExpiresInSeconds = 60 * 60 * 24; // 1 day
 
 async function createSession(userID: string): Promise<SessionWithToken> {
 	const now = new Date();
@@ -18,7 +21,48 @@ async function createSession(userID: string): Promise<SessionWithToken> {
 		token
 	};
 
-	await postSession();
+	await postSession(session.id, session.secretHash, session.createdAt, session.userID);
+	return session;
+}
+
+async function validateSessionToken(token: string): Promise<Session | null> {
+	const tokenParts = token.split('.');
+	if (tokenParts.length !== 2) {
+		return null;
+	}
+	const sessionID = tokenParts[0];
+	const sessionSecret = tokenParts[1];
+
+	const session = await getSession(sessionID);
+	if (!session) {
+		return null;
+	}
+
+	const tokenSecretHash = await hashSecret(sessionSecret);
+	const validSecret = constantTimeEqual(tokenSecretHash, session.secretHash);
+	if (!validSecret) {
+		return null;
+	}
+
+	return session;
+}
+
+async function getSession(sessionID: string): Promise<Session | null> {
+	const now = new Date();
+
+	const result = await getSessionByID(sessionID);
+
+	if (result === null) {
+		return null;
+	}
+
+	const session: Session = { ...result };
+
+	// Check expiration
+	if (now.getTime() - session.createdAt.getTime() >= sessionExpiresInSeconds * 1000) {
+		await deleteSessionByID(sessionID);
+		return null;
+	}
 
 	return session;
 }
