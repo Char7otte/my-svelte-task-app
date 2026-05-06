@@ -12,8 +12,8 @@ export const actions = {
 		const option: string = data.get('option') as string;
 
 		if (option === 'sign in') {
-			const user = await getUserByEmail(email);
-			const isCorrect = await bcrypt.compare(password, user.passwordHash);
+			// const user = await getUserByEmail(email);
+			// const isCorrect = await bcrypt.compare(password, user.passwordHash);
 		} else if (option === 'sign up') {
 			const username = data.get('username') as string;
 			await postUser(email, passwordHash, username);
