@@ -1,8 +1,8 @@
 import type { User } from '$lib/types';
-import { error } from 'console';
+import { error } from '@sveltejs/kit';
 import { sql } from './psql';
 
-export async function getUserByEmail(email: string) {
+export async function getUserByEmail(email: string): Promise<User> {
 	try {
 		const user = await sql<User[]>`SELECT * FROM users 
 		WHERE email = ${email}`;
@@ -13,7 +13,7 @@ export async function getUserByEmail(email: string) {
 	}
 }
 
-export async function postUser(email: string, password: string, username: string) {
+export async function postUser(email: string, password: string, username: string): Promise<User> {
 	try {
 		const user = await sql<User[]>`INSERT INTO users (email, password_hash, username) 
 		VALUES(${email}, ${password}, ${username ? username : null}) 
