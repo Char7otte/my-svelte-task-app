@@ -39,7 +39,7 @@ export async function deleteTask(id: string): Promise<void> {
 export async function getTasksJoinUser(): Promise<TaskWithUser[]> {
 	try {
 		const data: TaskWithUser[] = await sql<TaskWithUser[]>`
-	SELECT t.id, t.title, t.body, t.created_at AS "createdAt", u.username, u.email, t.status
+	SELECT t.id, t.title, t.body, t.created_at AS "createdAt", u.id AS "creatorID", u.username, u.email, t.status
 	FROM tasks t
 	JOIN users u on t.creator_id = u.id
 	ORDER BY created_at desc;

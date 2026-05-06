@@ -2,8 +2,9 @@
 	import { enhance } from '$app/forms';
 	import { resolve } from '$app/paths';
 	import RequiredAsterisk from '$lib/requiredAsterisk.svelte';
-	import { capitalize } from '$lib/utils/stringUtils';
+	import type { TaskWithUser } from '$lib/types';
 	import type { PageData } from './$types';
+	import Task from './task.svelte';
 
 	const { data }: { data: PageData } = $props();
 	let disabled = $derived<boolean>(data.user === undefined);
@@ -15,6 +16,12 @@
 		titleInput = '';
 		bodyInput = '';
 	}
+
+	let viewOption: string = $state<'all' | 'mine'>('all');
+	let taskList: TaskWithUser[] = $derived.by(() => {
+		if (viewOption === 'mine') return data.tasks.filter((t) => t.creatorID === data.user.id);
+		return data.tasks;
+	});
 </script>
 
 <div>
@@ -38,6 +45,7 @@
 <form method="POST" class="mb-10" use:enhance action="?/insert">
 	<fieldset {disabled}>
 		<h2 class="text-2xl">Create a task</h2>
+
 		<label for="title" class="block">Title: <RequiredAsterisk /></label>
 		<input type="text" name="title" id="title" bind:value={titleInput} required />
 		<label for="body" class="block">Body:</label>
@@ -48,25 +56,32 @@
 	</fieldset>
 </form>
 
+<h2 class="text-2xl">
+	<input
+		type="radio"
+		id="view-all"
+		class="sr-only"
+		value="all"
+		name="view-option"
+		bind:group={viewOption}
+	/>
+	<label for="view-all">All tasks</label>
+	<input
+		type="radio"
+		id="view-mine"
+		class="sr-only"
+		value="mine"
+		name="view-option"
+		bind:group={viewOption}
+	/>
+	<label for="view-mine">My tasks</label>
+</h2>
 <ul>
 	{#if data.tasks.length === 0}
 		<li>There are no tasks. Create one above!</li>
 	{:else}
-		{#each data.tasks as { id, title, body, createdAt, status, username, email } (id)}
-			<li class="my-3">
-				<div class="flex justify-between">
-					<div>
-						<h3 class="text-xl">{title}</h3>
-						<p class="text-[12px] text-gray-600">{username ? username : email}</p>
-					</div>
-					<div class="flex flex-col items-end">
-						<span>{capitalize(status)}</span>
-						<span class="text-[10px] text-gray-600">{createdAt.toLocaleString()}</span>
-					</div>
-				</div>
-				<p>{body}</p>
-			</li>
-			<hr />
+		{#each taskList as task (task.id)}
+			<Task {...task} />
 		{/each}
 	{/if}
 </ul>
