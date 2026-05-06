@@ -12,7 +12,7 @@ export async function postSession(
 		const dateInSeconds = Math.floor(createdAt.getTime() / 1000);
 		const data: Session[] = await sql<Session[]>`
             INSERT INTO sessions (id, secret_hash, created_at, user_id) 
-            VALUES (${id}, ${secretHash}, ${dateInSeconds}m ${userID}) 
+            VALUES (${id}, ${secretHash}, ${dateInSeconds}, ${userID}) 
             RETURNING id, secret_hash AS "secretHash", created_at AS "createdAt", user_id as "userID"`;
 		return data[0];
 	} catch (e) {

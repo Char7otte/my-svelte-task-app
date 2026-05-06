@@ -4,7 +4,7 @@ import { deleteSessionByID, getSessionByID, postSession } from './database/sessi
 
 const sessionExpiresInSeconds = 60 * 60 * 24; // 1 day
 
-async function createSession(userID: string): Promise<SessionWithToken> {
+export async function createSession(userID: string): Promise<SessionWithToken> {
 	const now = new Date();
 
 	const id = generateSecureRandomString();
@@ -25,7 +25,7 @@ async function createSession(userID: string): Promise<SessionWithToken> {
 	return session;
 }
 
-async function validateSessionToken(token: string): Promise<Session | null> {
+export async function validateSessionToken(token: string): Promise<Session | null> {
 	const tokenParts = token.split('.');
 	if (tokenParts.length !== 2) {
 		return null;
@@ -47,7 +47,7 @@ async function validateSessionToken(token: string): Promise<Session | null> {
 	return session;
 }
 
-async function getSession(sessionID: string): Promise<Session | null> {
+export async function getSession(sessionID: string): Promise<Session | null> {
 	const now = new Date();
 
 	const result = await getSessionByID(sessionID);
