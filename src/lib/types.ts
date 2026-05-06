@@ -4,6 +4,7 @@ export type Task = {
 	body: string;
 	createdAt: Date;
 	creatorID: string;
+	status: string;
 };
 
 export type User = {
@@ -23,4 +24,9 @@ export type Session = {
 
 export interface SessionWithToken extends Session {
 	token: string;
+}
+
+export interface TaskWithUser extends Task {
+	username: string;
+	email: string;
 }

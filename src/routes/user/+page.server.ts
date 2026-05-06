@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt';
 
 export async function load({ locals }) {
 	return {
-		user: event.locals.user
+		user: locals.user
 	};
 }
 

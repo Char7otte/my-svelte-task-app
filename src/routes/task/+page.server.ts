@@ -1,8 +1,8 @@
 import { deleteTask, getTasksJoinUser, postTask } from '$lib/server/database/tasks.js';
-import type { Task } from '$lib/types';
+import type { TaskWithUser } from '$lib/types';
 
 export async function load({ locals }) {
-	const tasks: Task[] = await getTasks();
+	const tasks: TaskWithUser[] = await getTasksJoinUser();
 
 	return {
 		tasks,
@@ -11,12 +11,12 @@ export async function load({ locals }) {
 }
 
 export const actions = {
-	insert: async ({ request }) => {
+	insert: async ({ request, locals }) => {
 		const data: FormData = await request.formData();
+		const userID = locals.user.id;
 		const title: string = data.get('title') as string;
 		const body: string = data.get('body') as string;
-		const newTask: Task = await postTask(title, body);
-		return { newTask };
+		await postTask(title, body, userID);
 	},
 	delete: async ({ request }) => {
 		const data: FormData = await request.formData();
