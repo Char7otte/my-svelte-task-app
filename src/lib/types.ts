@@ -12,3 +12,14 @@ export type User = {
 	passwordHash: string;
 	name: string;
 };
+
+export type Session = {
+	id: string;
+	secretHash: Uint8Array;
+	createdAt: Date;
+	userID: string;
+};
+
+export interface SessionWithToken extends Session {
+	token: string;
+}
