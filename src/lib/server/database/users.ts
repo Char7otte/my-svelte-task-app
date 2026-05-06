@@ -13,15 +13,9 @@ export async function getUserByEmail(email: string) {
 	}
 }
 
-export async function postUser(
-	email: string,
-	password: string,
-	username: string
-) {
+export async function postUser(email: string, password: string, username: string) {
 	try {
-		const user = await sql<
-			User[]
-		>`INSERT INTO users (email, password_hash, username) 
+		const user = await sql<User[]>`INSERT INTO users (email, password_hash, username) 
 		VALUES(${email}, ${password}, ${username ? username : null}) 
 		RETURNING id, email, password_hash AS "passwordHash", username`;
 		return user[0];
