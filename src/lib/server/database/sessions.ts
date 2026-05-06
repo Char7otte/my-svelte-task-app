@@ -36,3 +36,14 @@ export async function getSessionByID(id: string): Promise<Session> {
 		error(500, { message: 'Failed to create session' });
 	}
 }
+
+export async function deleteSessionByID(id: string): Promise<boolean> {
+	try {
+		await sql`
+		DELETE FROM sessions WHERE id = ${id}`;
+		return true;
+	} catch (e) {
+		console.error(e);
+		error(500, { message: 'Failed to delete session' });
+	}
+}
