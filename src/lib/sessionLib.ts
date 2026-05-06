@@ -1,6 +1,6 @@
 import { constantTimeEqual, generateSecureRandomString, hashSecret } from '$lib/hashUtils';
 import type { Session, SessionWithToken } from '$lib/types';
-import { deleteSessionByID, getSessionByID, postSession } from './database/sessions';
+import { deleteSessionByID, getSessionByID, postSession } from './server/database/sessions';
 
 const sessionExpiresInSeconds = 60 * 60 * 24; // 1 day
 
