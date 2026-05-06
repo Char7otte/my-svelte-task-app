@@ -21,7 +21,7 @@ export const actions = {
 			const session = await createSession(user.id);
 			console.log('Created Session: ', session);
 		} else {
-			error('403', { message: "smh don't modify the form options" });
+			error(403, { message: "smh don't modify the form options" });
 		}
 	}
 };
