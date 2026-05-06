@@ -11,6 +11,7 @@ export type User = {
 	email: string;
 	passwordHash: string;
 	username: string;
+	role: string;
 };
 
 export type Session = {
