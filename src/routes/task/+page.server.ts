@@ -1,12 +1,12 @@
 import { deleteTask, getTasksJoinUser, postTask } from '$lib/server/database/tasks.js';
 import type { Task } from '$lib/types';
 
-export async function load(event) {
+export async function load({ locals }) {
 	const tasks: Task[] = await getTasks();
 
 	return {
 		tasks,
-		user: event.locals.user
+		user: locals.user
 	};
 }
 

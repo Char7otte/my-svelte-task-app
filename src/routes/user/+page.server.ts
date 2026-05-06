@@ -5,7 +5,7 @@ import type { User } from '$lib/types.js';
 import { error, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
 
-export async function load(event) {
+export async function load({ locals }) {
 	return {
 		user: event.locals.user
 	};
