@@ -17,6 +17,14 @@
 	<a href={resolve('/user')} class="text-xl text-white">Account</a>
 </nav>
 
-<div class="m-10">
-	{@render children()}
+<div class="mx-auto my-2 max-w-187.5">
+	<div class="p-4">{@render children()}</div>
 </div>
+
+<footer class="bg-black text-center text-white">
+	<div class="mx-auto w-56.25 py-10">
+		Created by Shar with Sveltekit<br />
+		be gay and do estrogen <br />
+		<a href="https://github.com/Char7otte/my-svelte-task-app" class="underline">Source</a>
+	</div>
+</footer>
