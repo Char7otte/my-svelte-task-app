@@ -1,4 +1,4 @@
-import { constantTimeEqual, generateSecureRandomString, hashSecret } from '$lib/hashUtils';
+import { constantTimeEqual, generateSecureRandomString, hashSecret } from '$lib/utils/hashUtils';
 import type { Session, SessionWithToken } from '$lib/types';
 import { deleteSessionByID, getSessionByID, postSession } from './server/database/sessions';
 

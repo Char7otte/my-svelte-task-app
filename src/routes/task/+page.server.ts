@@ -1,4 +1,4 @@
-import { deleteTask, getTasks, postTask } from '$lib/server/database/tasks.js';
+import { deleteTask, getTasksJoinUser, postTask } from '$lib/server/database/tasks.js';
 import type { Task } from '$lib/types';
 
 export async function load(event) {
