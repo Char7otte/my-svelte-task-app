@@ -4,7 +4,9 @@ import { sql } from './psql';
 
 export async function getUserByEmail(email: string): Promise<User> {
 	try {
-		const user = await sql<User[]>`SELECT * FROM users 
+		const user = await sql<
+			User[]
+		>`SELECT id, email, password_hash AS "passwordHash", username, role FROM users 
 		WHERE email = ${email}`;
 		return user[0];
 	} catch (e) {
