@@ -1,14 +1,4 @@
-import { deleteTask, getTasksJoinUser, postTask } from '$lib/server/database/tasks.js';
-import type { TaskWithUser } from '$lib/types';
-
-export async function load({ locals }) {
-	const tasks: TaskWithUser[] = await getTasksJoinUser();
-
-	return {
-		tasks,
-		user: locals.user
-	};
-}
+import { deleteTask, postTask } from '$lib/server/database/tasks.js';
 
 export const actions = {
 	insert: async ({ request, locals }) => {
