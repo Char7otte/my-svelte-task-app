@@ -17,7 +17,7 @@ export const actions = {
 
 		const email: string = data.get('email') as string;
 		const password: string = data.get('password') as string;
-		const option: string = data.get('option') as string;
+		const option: string = data.get('sign-option') as string;
 
 		if (option === 'sign in') {
 			const user: User = await getUserByEmail(email);
