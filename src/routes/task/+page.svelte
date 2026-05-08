@@ -4,7 +4,7 @@
 	import RequiredAsterisk from '$lib/requiredAsterisk.svelte';
 	import type { TaskWithUser } from '$lib/types';
 	import type { PageData } from './$types';
-	import Task from './task.svelte';
+	import TaskCard from './taskCard.svelte';
 
 	const { data }: { data: PageData } = $props();
 	let disabled = $derived<boolean>(data.user === undefined);
@@ -75,7 +75,7 @@
 		<li>There are no tasks. Create one above!</li>
 	{:else}
 		{#each taskList as task (task.id)}
-			<Task {...task} />
+			<TaskCard {...task} />
 		{/each}
 	{/if}
 </ul>

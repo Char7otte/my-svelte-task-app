@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Task from '../task.svelte';
+	import TaskCard from '../taskCard.svelte';
 	import type { PageData, RouteParams } from './$types';
 
 	let { data, params }: { data: PageData; params: RouteParams } = $props();
@@ -8,4 +8,4 @@
 </script>
 
 <h1>{params.slug}</h1>
-<Task {...slugTask} />
+<TaskCard {...slugTask} />
