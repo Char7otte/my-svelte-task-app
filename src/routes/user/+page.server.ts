@@ -1,7 +1,7 @@
-import { comparePasswordHash } from '$lib/hashUtils.js';
 import { getUserByEmail, postUser } from '$lib/server/database/users';
 import { createSession } from '$lib/sessionLib.js';
 import type { User } from '$lib/types.js';
+import { comparePasswordHash } from '$lib/utils/hashUtils';
 import { error, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
 
