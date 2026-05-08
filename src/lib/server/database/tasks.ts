@@ -63,3 +63,15 @@ export async function patchTask(id: string, title: string, body: string): Promis
 		error(500, { message: 'Failed to edit task' });
 	}
 }
+
+export async function getTaskByID(id: string): Promise<TaskWithUser> {
+	try {
+		const data = await sql<TaskWithUser[]>`
+		SELECT * FROM tasks 
+		WHERE id = ${id}`;
+		return data[0];
+	} catch (e) {
+		console.error(e);
+		error(500, { message: 'Faield to get task}' });
+	}
+}
