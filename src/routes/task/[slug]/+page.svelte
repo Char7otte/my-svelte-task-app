@@ -1,6 +1,6 @@
 <script lang="ts">
-	import TaskCard from '../taskCard.svelte';
 	import type { PageData, RouteParams } from './$types';
+	import TaskDetail from './taskDetail.svelte';
 
 	let { data, params }: { data: PageData; params: RouteParams } = $props();
 	// Route ensures slugTask exists
@@ -8,4 +8,4 @@
 </script>
 
 <h1>{params.slug}</h1>
-<TaskCard {...slugTask} />
+<TaskDetail {...slugTask} />
