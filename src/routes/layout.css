@@ -9,27 +9,25 @@
 	button {
 		@apply cursor-pointer rounded-md border-2 border-solid px-1.5 py-1;
 	}
-	input:not([type='radio']):not([type='checkbox']),
-	textarea {
-		@apply mb-2 block border-2 border-solid px-1.5 py-1;
-	}
-	fieldset:disabled * {
-		@apply cursor-not-allowed;
-	}
-	fieldset:disabled {
-		opacity: 0.5;
-	}
 	button.primary {
 		@apply border-0 bg-black text-white;
 	}
 	button.secondary {
 		@apply border-0 bg-gray-400 text-white;
 	}
-	input[type='radio'] + label {
+	input:not([type='radio']):not([type='checkbox']),
+	textarea {
+		@apply mb-2 block border-2 border-solid px-1.5 py-1;
+	}
+	input[type='radio']:not([disabled]) + label {
 		@apply cursor-pointer;
 	}
 	input[type='radio']:checked + label {
 		@apply font-medium underline;
+	}
+	input[type='radio']:disabled + label,
+	:disabled * {
+		@apply cursor-not-allowed opacity-50;
 	}
 }
 
