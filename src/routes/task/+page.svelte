@@ -34,14 +34,6 @@
 	{/if}
 </div>
 
-{#if disabled}
-	<div>
-		<h1 class="text-2xl">
-			You need to <a href={resolve('/user')} class="text-blue-600 underline">sign in</a> to create tasks.
-		</h1>
-	</div>
-{/if}
-
 <form method="POST" class="mb-10" use:enhance action="?/insert">
 	<fieldset {disabled}>
 		<h2 class="text-2xl">Create a task</h2>
