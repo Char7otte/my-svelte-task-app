@@ -66,6 +66,7 @@
 		value="mine"
 		name="view-option"
 		bind:group={viewOption}
+		{disabled}
 	/>
 	<label for="view-mine">My tasks</label>
 </h2>
