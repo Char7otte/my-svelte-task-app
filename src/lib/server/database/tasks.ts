@@ -50,3 +50,16 @@ export async function getTasksJoinUser(): Promise<TaskWithUser[]> {
 		error(500, { message: 'Failed to get tasks' });
 	}
 }
+
+export async function patchTask(id: string, title: string, body: string): Promise<Task> {
+	try {
+		const data: Task[] = await sql<Task[]>`
+			UPDATE tasks 
+			SET title = ${title}, body = ${body} 
+			WHERE id = ${id}`;
+		return data[0];
+	} catch (e) {
+		console.error(e);
+		error(500, { message: 'Failed to edit task' });
+	}
+}
