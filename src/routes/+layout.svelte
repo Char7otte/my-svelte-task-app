@@ -18,7 +18,7 @@
 		<a href={resolve('/user')} class="text-xl text-white">Account</a>
 	</nav>
 
-	<div class="mx-auto my-2 max-w-187.5">
+	<div class="mx-auto my-2 lg:w-187.5">
 		<div class="p-4">{@render children()}</div>
 	</div>
 
