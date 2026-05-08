@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { resolve } from '$app/paths';
-	import RequiredAsterisk from '$lib/requiredAsterisk.svelte';
+	import RequiredAsterisk from '$lib/components/requiredAsterisk.svelte';
 	import type { TaskWithUser } from '$lib/types';
 	import type { PageData } from './$types';
 	import TaskCard from './taskCard.svelte';

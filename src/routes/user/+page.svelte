@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import RequiredAsterisk from '$lib/requiredAsterisk.svelte';
+	import RequiredAsterisk from '$lib/components/requiredAsterisk.svelte';
 
 	let signOption: string = $state<'sign in' | 'sign up'>('sign in');
 	let isSignIn: boolean = $derived<boolean>(signOption === 'sign in');
