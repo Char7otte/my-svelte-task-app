@@ -3,10 +3,7 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		interface Locals {
-			user: User | null;
-			session: Session | null;
-		}
+		// interface Locals {}
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
