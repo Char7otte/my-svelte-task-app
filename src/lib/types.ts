@@ -1,10 +1,13 @@
+export type Status = "not started" | "working" |"completed"
+export type Role = "user" | "admin"
+
 export type Task = {
 	id: string;
 	title: string;
 	body: string;
 	createdAt: Date;
 	creatorID: string;
-	status: string;
+	status: Status
 };
 
 export type User = {
@@ -12,7 +15,7 @@ export type User = {
 	email: string;
 	passwordHash: string;
 	username: string;
-	role: string;
+	role: Role
 };
 
 export type Session = {

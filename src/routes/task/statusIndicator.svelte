@@ -1,5 +1,6 @@
 <script lang="ts">
-	let { status }: { status: 'not started' | 'working' | 'completed' } = $props();
+	import type { Status } from "$lib/types";
+	let { status }: { status: Status } = $props();
 
 	const colorDictionary = {
 		'not started': 'bg-green-600',
