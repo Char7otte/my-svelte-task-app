@@ -24,6 +24,7 @@
 	},
 	"dependencies": {
 		"bcrypt": "^6.0.0",
+		"bits-ui": "^2.18.1",
 		"postgres": "^3.4.9"
 	}
 }
