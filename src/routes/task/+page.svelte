@@ -75,7 +75,7 @@
 		<li>There are no tasks. Create one above!</li>
 	{:else}
 		{#each taskList as task (task.id)}
-			<TaskCard {...task} />
+			<TaskCard {...task} userID={data.user.id} userRole={data.user.role}/>
 		{/each}
 	{/if}
 </ul>
